@@ -1,8 +1,11 @@
+<!-- generated from data/trends.db by scripts/render.py, do not edit by hand -->
 # Relevant models
+
+> This page is rendered from a SQLite database (`data/trends.db`) by GitHub Actions. See [How this repo works](#how-this-repo-works).
 
 AI models worth knowing about if you build with AI, and why each one matters.
 
-**Last updated:** 11 Nov 2026 (Prague)
+**Last updated:** 11 Nov 2026 (Prague)  
 **How the ranking works:** what matters to a working AI developer: capability, whether you can call it through an API today, price for the performance, and how new it is. Vendor benchmark claims are the vendors' own.
 
 ## What changed lately
@@ -10,8 +13,8 @@ AI models worth knowing about if you build with AI, and why each one matters.
 - **Claude Fable 5.2 / Mythos 5.2 (9 Nov):** Anthropic's top model got faster (up to 30% vs 5.1) and cheaper ($8/$40). A swarm of about 1,000 Fable agents formalized Fermat's Last Theorem in Lean in 30 hours.
 - **Muse Ember (9 Nov):** Meta's small agent workhorse costs $0.10/$0.50, has a 1M-token context, and Meta claims it beats Haiku 5.5 and GPT-6 Luna on intelligence per dollar.
 - **Inkling 2 Small (5 Nov):** Thinking Machines' 594B-total/17B-active MoE. It runs on Tinker now; the Apache 2.0 weights are promised after safety testing and were not on Hugging Face as of 11 Nov.
-- **Kimi K3.1 Pro open weights (2 Nov):** a 2.8T-parameter MoE that you can download, competitive with closed frontier models on Moonshot's own tables.
 - **Gated cyber models:** GPT-6 Cyber (5 Nov) and Gemini 4 Carbon (28 Oct) are both out, but only to vetted defenders for now.
+- **Kimi K3.1 Pro open weights (2 Nov):** a 2.8T-parameter MoE that you can download, competitive with closed frontier models on Moonshot's own tables.
 
 ## Ranked
 
@@ -42,12 +45,40 @@ Prices are USD per million input/output tokens at standard API rates unless note
 
 ## Open weights worth running
 
-Kimi K3.1 Pro (custom license), DeepSeek-V4.1-Flash-1017 (MIT) and Mistral Large 4 (modified MIT, MaaS needs a license) are open now. Inkling 2 Small (Apache 2.0) is pending.
+Downloadable weights; the note gives the license.
+
+- **Kimi K3.1 Pro**: open now, custom license
+- **DeepSeek-V4.1-Flash-1017**: open now, MIT
+- **Mistral Large 4 ("Le Chonk")**: open now, modified MIT; Model-as-a-Service use needs a commercial license
+- **Inkling 2 Small**: pending: Apache 2.0 weights promised after safety testing
 
 ## Fast/cheap specialists
 
-Jev (classify and route in under a second), Muse Ember, Claude Haiku 5.5, and GPT-6 Luna.
+- **Jev 1.14**: classify and route in under a second
+- **Muse Ember**
+- **Claude Haiku 5.5**
+- **GPT-6 Luna**
 
 ---
 
 Refreshed on weekday mornings (Prague). Models are re-ranked by developer relevance (capability, API availability, price/performance, novelty), and every entry links a primary source checked at refresh time.
+
+## How this repo works
+
+A small, domain-agnostic trend-tracking pipeline. AI models are the first domain.
+
+```
+research (today: a scheduled assistant; planned: LangChain agents on a private VPS)
+   │  scripts/upsert.py  (add / update / retire items, sources, change notes)
+   ▼
+data/trends.db  (SQLite, committed: the single source of truth)
+   │  push to main → .github/workflows/render.yml → scripts/render.py
+   ▼
+README.md · reports/<domain>.md · reports/<domain>.pdf  (generated, never hand-edited)
+```
+
+| Domain | Last updated | Reports |
+|---|---|---|
+| Relevant models (`ai-models`) | 11 Nov 2026 | [Markdown](reports/ai-models.md) · [PDF](reports/ai-models.pdf) |
+
+Schema: [`db/schema.sql`](db/schema.sql) · Architecture and how to add a domain: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
