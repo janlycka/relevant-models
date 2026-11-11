@@ -1,0 +1,68 @@
+name: Render reports
+
+# Re-render README.md and reports/* whenever the database or the code that renders it changes.
+# Generated files are deliberately NOT in the paths filter, and the bot commit carries [skip ci],
+# so the workflow cannot trigger itself.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/**"
+      - "scripts/**"
+      - "db/**"
+      - "requirements-pdf.txt"
+      - ".github/workflows/render.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: render-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-pdf.txt
+
+      - name: Install PDF dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libpango-1.0-0 libpangoft2-1.0-0 fonts-dejavu-core
+          pip install -r requirements-pdf.txt
+
+      - name: Check the database has no pending migrations
+        run: |
+          cp data/trends.db /tmp/check.db
+          python scripts/upsert.py --db /tmp/check.db migrate | tee /tmp/migrate.log
+          grep -q "nothing (up to date)" /tmp/migrate.log || {
+            echo "::error::data/trends.db has unapplied migrations; run scripts/upsert.py migrate locally and commit the DB"; exit 1; }
+
+      - name: Render Markdown and PDF
+        run: python -W ignore scripts/render.py --require-pdf
+
+      - name: Commit generated files
+        run: |
+          git add README.md reports/
+          if git diff --cached --quiet; then
+            echo "Generated files already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Render reports from data/trends.db [skip ci]"
+          git push
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: reports/*.pdf
+          if-no-files-found: error

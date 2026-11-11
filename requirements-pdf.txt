@@ -1,0 +1,2 @@
+# Only needed for PDF output; Markdown rendering and the CLI are stdlib-only.
+weasyprint==63.1
