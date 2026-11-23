@@ -5,16 +5,16 @@
 
 AI models worth knowing about if you build with AI, and why each one matters.
 
-**Last updated:** 19 Nov 2026 (Prague)  
+**Last updated:** 23 Nov 2026 (Prague)  
 **How the ranking works:** what matters to a working AI developer: capability, whether you can call it through an API today, price for the performance, and how new it is. Vendor benchmark claims are the vendors' own.
 
 ## What changed lately
 
+- **Inkling 2 Mini (20 Nov):** Thinking Machines released Inkling 2 Mini, a small looped-transformer MoE (26.4B total, 3.4B active) that fits in about 20GB and runs offline on a laptop, with Apache 2.0 weights on Hugging Face. Added at #17. Mistral Large 4 dropped to keep the list at 20.
 - **Gemini 4 Neon (18 Nov):** Google's new fast frontier model scores 61 on the AA Intelligence Index (#3 overall) and tops the AA Coding Agent Index at $3/$15 per M tokens with a 1M context. Added at #3. Gemini 4 Carbon, still limited to Fairwind cyber defenders and now outscored, dropped to keep the list at 20.
 - **Cheaper slow lane for OpenAI (public beta):** Responses API background requests with a 2h or 8h completion window now cost 30% or 40% below Standard on GPT-6.2 Astra, GPT-6.2 Sol, GPT-6.1 Terra and GPT-6 Luna. New models from 6.2 on launch without Flex processing.
 - **Qwen4-Max and Hy4 flash (16 Nov):** Alibaba took Qwen4-Max out of preview onto the QwenCloud API (moved up to #9). Tencent launched Hy4 flash, a fast, very cheap 12B-active MoE (added at #14). Grok 4.7 and Muse Wonder dropped to keep the list at 20.
 - **GPT-6.2 Astra and Sol, MAI Code 2 (17 Nov):** OpenAI shipped GPT-6.2 Astra (20% cheaper than GPT-6 Astra) and GPT-6.2 Sol (same price as 6.1 Sol), replacing both older models at #2 and #3. Microsoft launched MAI Code 2 for GitHub Copilot (added at #12). GPT-6 Cyber dropped to keep the list at 20.
-- **LongCat-2.5 weights (Meituan):** Meituan published LongCat-2.5 on Hugging Face under MIT: a 1.6T-parameter multimodal MoE for agentic coding. Added at #10; GPT-6 Luna dropped to keep the list tight.
 
 ## Ranked
 
@@ -36,10 +36,10 @@ AI models worth knowing about if you build with AI, and why each one matters.
 | 14 | Jev 1.14 | TypeSafe AI | 14 Oct 2026 | Classifying, routing and scoring stuff in under a second | It's not a chatbot but a fast classifier: send it a state plus typed questions (Choice, Score, yes/no "Noul", Box) and get calibrated probabilities back in 70–500 ms instead of generated text. It never returns a type error, costs $0.042 per M input tokens, and output is free. | [docs.typesafe.ai](https://docs.typesafe.ai/models) |
 | 15 | Gemini Decision 1 | Google | 11 Nov 2026 | Fast yes/no, choice and rubric decisions over any media | Google's answer to Jev: send one input (text, images, audio, video or PDF, up to 256K tokens) plus up to 1,000 typed questions and get calibrated probabilities back in about 150–250 ms. $0.10 per M input tokens, output free, via the Gemini Decisions API. | [blog.google](https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/), [AI Studio docs](https://aistudio.google.com/docs/models/gemini-decision-1) |
 | 16 | Hy4 flash | Tencent | 16 Nov 2026 | Cheap everyday agent work: docs, decks, research | A 224B MoE with only 12B active, 1M context and multimodal input, decoding at 150+ tokens/s for about $0.07 in / $0.28 out per M tokens on Tencent Cloud TokenHub. Tencent plans to open-source it. | [tencent.com](https://www.tencent.com/tencent-launches-hy4-flash-to-power-high-speed-cost-efficient-ai-deployment-for-everyday-workflows/) |
-| 17 | Muse Ember | Meta | 9 Nov 2026 | Subagents: tool calls, extraction, routing | Very cheap at $0.10/$0.50, with a 1M context and up to 512K output; Meta says it gives more intelligence per dollar than Haiku 5.5 or GPT-6 Luna. `muse-ember-1.0` on the Meta Model API. | [research.meta.ai](https://research.meta.ai/blog/muse-ember) |
-| 18 | Inkling 2 Small | Thinking Machines Lab | 5 Nov 2026 | Open-weight fine-tuning base, agentic coding | 594B/17B MoE with image input and a 1M context, built to be fine-tuned. Apache 2.0 weights are now on Hugging Face (NVFP4 needs about 500GB of VRAM), with API access at NVIDIA, Fireworks, Together and others. | [thinkingmachines.ai](https://thinkingmachines.ai/news/inkling-2-small/), [huggingface.co](https://huggingface.co/thinkingmachines/Inkling-2-Small) |
-| 19 | Claude Haiku 5.5 | Anthropic | 7 Oct 2026 | Fast, cheap subagents, support, browser use | $0.10/$0.50 for prompts up to 100K tokens, about 75% cheaper to run than Haiku 4.5, now with adjustable effort. | [anthropic.com](https://www.anthropic.com/claude-haiku-5-5) |
-| 20 | Mistral Large 4 ("Le Chonk") | Mistral AI | Oct 2026 (weights) | Sovereign/self-hosted coding and cyber defense | European-trained ~1T open-weight model, $0.70/$2.10 via API. Free to use commercially unless you sell it as a model service. | [mistral.ai](https://mistral.ai/news/mistral-large-4-oss/) |
+| 17 | Inkling 2 Mini | Thinking Machines Lab | 20 Nov 2026 | Local agentic coding on a laptop | 26.4B/3.4B-active looped MoE that fits in about 20GB, so it runs offline on a laptop; Thinking Machines says it leads open models under 100B on DeepSWE v1.1 (48.2%). Apache 2.0 weights on Hugging Face, also on Tinker. | [thinkingmachines.ai](https://thinkingmachines.ai/news/inkling-2-mini/), [huggingface.co](https://huggingface.co/thinkingmachines/Inkling-2-Mini) |
+| 18 | Muse Ember | Meta | 9 Nov 2026 | Subagents: tool calls, extraction, routing | Very cheap at $0.10/$0.50, with a 1M context and up to 512K output; Meta says it gives more intelligence per dollar than Haiku 5.5 or GPT-6 Luna. `muse-ember-1.0` on the Meta Model API. | [research.meta.ai](https://research.meta.ai/blog/muse-ember) |
+| 19 | Inkling 2 Small | Thinking Machines Lab | 5 Nov 2026 | Open-weight fine-tuning base, agentic coding | 594B/17B MoE with image input and a 1M context, built to be fine-tuned. Apache 2.0 weights are now on Hugging Face (NVFP4 needs about 500GB of VRAM), with API access at NVIDIA, Fireworks, Together and others. | [thinkingmachines.ai](https://thinkingmachines.ai/news/inkling-2-small/), [huggingface.co](https://huggingface.co/thinkingmachines/Inkling-2-Small) |
+| 20 | Claude Haiku 5.5 | Anthropic | 7 Oct 2026 | Fast, cheap subagents, support, browser use | $0.10/$0.50 for prompts up to 100K tokens, about 75% cheaper to run than Haiku 4.5, now with adjustable effort. | [anthropic.com](https://www.anthropic.com/claude-haiku-5-5) |
 
 Prices are USD per million input/output tokens at standard API rates unless noted.
 
@@ -50,8 +50,8 @@ Downloadable weights; the note gives the license.
 - **Kimi K3.1 Pro**: open now, custom license
 - **DeepSeek-V4.1-Flash-1017**: open now, MIT
 - **LongCat-2.5**: MIT license, weights on Hugging Face
+- **Inkling 2 Mini**: open now, Apache 2.0
 - **Inkling 2 Small**: open now, Apache 2.0
-- **Mistral Large 4 ("Le Chonk")**: open now, modified MIT; Model-as-a-Service use needs a commercial license
 
 ## Fast/cheap specialists
 
@@ -81,6 +81,6 @@ README.md · reports/<domain>.md · reports/<domain>.pdf  (generated, never hand
 
 | Domain | Last updated | Reports |
 |---|---|---|
-| Relevant models (`ai-models`) | 19 Nov 2026 | [Markdown](reports/ai-models.md) · [PDF](reports/ai-models.pdf) |
+| Relevant models (`ai-models`) | 23 Nov 2026 | [Markdown](reports/ai-models.md) · [PDF](reports/ai-models.pdf) |
 
 Schema: [`db/schema.sql`](db/schema.sql) · Architecture and how to add a domain: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
